@@ -23,16 +23,10 @@ function Home() {
 
     const [teams, setTeams] = useState([]);
 
-    const verifysession = sessionStorage.getItem("id");
-
     useEffect(() => {
-        if (verifysession !== id) {
-            navigate('/');
-            return;
-        };
         getManager();
         getTeams();
-    }, [id,verifysession]);
+    }, [id]);
 
     const getManager = async () => {
         try {

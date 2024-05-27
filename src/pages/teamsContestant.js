@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TopNav from '../components/topNavBarManager';
+import TopNav from '../components/topNavBarContestant'
 import SideNav from '../components/sideNavBarContestant';
 import '../styles/teams.css';
 import axios from 'axios';
