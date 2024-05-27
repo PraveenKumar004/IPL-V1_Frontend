@@ -55,23 +55,27 @@ function Home() {
     };
 
     const createTeam = async () => {
-        try {
-            console.log(value);
-            console.log(data)
-            const create = await axios.post(`https://ipl-v1-backend.onrender.com/createteam/${id}`, data);
-            if (create.data === "exist") {
-                alert("Already Exist");
-            } else {
-                window.location.reload();
+        if (data.teamName && data.teamAbbreviation && data.password) {
+            try {
+
+                const create = await axios.post(`https://ipl-v1-backend.onrender.com/createteam/${id}`, data);
+                if (create.data === "exist") {
+                    alert("Already Exist");
+                } else {
+                    sessionStorage.setItem("id", create.data);
+                    navigate(`/${id}/contestant/${create.data}`)
+                }
+            } catch (err) {
+                console.log(err);
             }
-        } catch (err) {
-            console.log(err);
+        }
+        else {
+            alert("All Fields Are Required")
         }
     };
 
     const joinContestant = async (e) => {
         try {
-            console.log(e);
             console.log(data)
             const create = await axios.post(`https://ipl-v1-backend.onrender.com/verifycontestant/${e}`, data);
             if (create.data === "done") {
@@ -87,7 +91,7 @@ function Home() {
 
     return (
         <>
-            <div className='top-position'><TopNav Title={"Teams"}/></div>
+            <div className='top-position'><TopNav Title={"Teams"} /></div>
             <div className='d-flex'>
                 <div className='side-position'><SideNav /></div>
                 <div className='main'>

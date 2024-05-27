@@ -39,34 +39,44 @@ function Home() {
     };
 
     const createManger = async () => {
-        try {
-            console.log(data);
-            const create = await axios.post('https://ipl-v1-backend.onrender.com/createmanager', data);
-            if (create.data === "exist") {
-                alert("Already Exist")
+        if (data.id && data.amount && data.password && data.amount <= 100) {
+            try {
+                console.log(data);
+                const create = await axios.post('https://ipl-v1-backend.onrender.com/createmanager', data);
+                if (create.data === "exist") {
+                    alert("Already Exist")
+                }
+                else {
+                    sessionStorage.setItem("id", create.data);
+                    navigate(`/manager/${create.data}`)
+                };
             }
-            else {
-                sessionStorage.setItem("id", create.data);
-                navigate(`/manager/${create.data}`)
-            };
+            catch (err) {
+                console.log(err)
+            }
         }
-        catch (err) {
-            console.log(err)
+        else {
+            alert("All Fields Are Required")
         }
     }
 
     const verifyManger = async () => {
-        try {
-            console.log(data);
-            const response = await axios.post('https://ipl-v1-backend.onrender.com/verifymanager', data);
-            if (response.data === "wrong") {
-                alert("Enter Valid ID and Password");
-            } else {
-                sessionStorage.setItem("id", response.data);
-                navigate(`/manager/${response.data}`);
+        if (data.id && data.password ) {
+            try {
+                console.log(data);
+                const response = await axios.post('https://ipl-v1-backend.onrender.com/verifymanager', data);
+                if (response.data === "wrong") {
+                    alert("Enter Valid ID and Password");
+                } else {
+                    sessionStorage.setItem("id", response.data);
+                    navigate(`/manager/${response.data}`);
+                }
+            } catch (err) {
+                console.log(err);
             }
-        } catch (err) {
-            console.log(err);
+        }
+        else {
+            alert("All Fields Are Required")
         }
     };
 
