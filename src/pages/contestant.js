@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 import '../styles/manager.css'
 import axios from 'axios';
 
-const socket = io('http://localhost:5000', {
+const socket = io('https://ipl-v1-backend.onrender.com', {
     transports: ['websocket', 'polling'],
     withCredentials: true,
 });

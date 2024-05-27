@@ -36,7 +36,7 @@ function Home() {
 
     const getManager = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/managerdetails/${id}`);
+            const response = await axios.get(`https://ipl-v1-backend.onrender.com/managerdetails/${id}`);
             setValue(response.data);
         } catch (err) {
             console.log(err);
@@ -45,7 +45,7 @@ function Home() {
 
     const getTeams = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/getteams/${id}`);
+            const response = await axios.get(`https://ipl-v1-backend.onrender.com/getteams/${id}`);
             setTeams(response.data);
         } catch (err) {
             console.log(err);
@@ -64,7 +64,7 @@ function Home() {
         try {
             console.log(value);
             console.log(data)
-            const create = await axios.post(`http://localhost:5000/createteam/${id}`, data);
+            const create = await axios.post(`https://ipl-v1-backend.onrender.com/createteam/${id}`, data);
             if (create.data === "exist") {
                 alert("Already Exist");
             } else {
@@ -79,7 +79,7 @@ function Home() {
         try {
             console.log(e);
             console.log(data)
-            const create = await axios.post(`http://localhost:5000/verifycontestant/${e}`, data);
+            const create = await axios.post(`https://ipl-v1-backend.onrender.com/verifycontestant/${e}`, data);
             if (create.data === "done") {
                 sessionStorage.setItem("id", e);
                 navigate(`/${id}/contestant/${e}`)

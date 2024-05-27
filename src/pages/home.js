@@ -41,7 +41,7 @@ function Home() {
     const createManger = async () => {
         try {
             console.log(data);
-            const create = await axios.post('http://localhost:5000/createmanager', data);
+            const create = await axios.post('https://ipl-v1-backend.onrender.com/createmanager', data);
             if (create.data === "exist") {
                 alert("Already Exist")
             }
@@ -58,7 +58,7 @@ function Home() {
     const verifyManger = async () => {
         try {
             console.log(data);
-            const response = await axios.post('http://localhost:5000/verifymanager', data);
+            const response = await axios.post('https://ipl-v1-backend.onrender.com/verifymanager', data);
             if (response.data === "wrong") {
                 alert("Enter Valid ID and Password");
             } else {
@@ -73,7 +73,7 @@ function Home() {
     const verifyContest = async () => {
         try {
             console.log(data);
-            const response = await axios.post(`http://localhost:5000/managercontestant`, data);
+            const response = await axios.post(`https://ipl-v1-backend.onrender.com/managercontestant`, data);
             if (response.data === "managernot") {
                 alert("Enter Valid Room ID ");
             } else {

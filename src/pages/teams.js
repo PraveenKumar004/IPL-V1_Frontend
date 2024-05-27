@@ -30,7 +30,7 @@ function Home() {
 
     const getTeams = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/getteams/${id}`);
+            const response = await axios.get(`https://ipl-v1-backend.onrender.com/getteams/${id}`);
             setTeams(response.data);
         } catch (err) {
             console.log(err);
@@ -39,7 +39,7 @@ function Home() {
 
     const getPlayers = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/getsoldplayersbypid/${id}`);
+            const response = await axios.get(`https://ipl-v1-backend.onrender.com/getsoldplayersbypid/${id}`);
             const playersByTeam = response.data.reduce((acc, player) => {
                 const teamId = player.pid; 
                 if (!acc[teamId]) {
@@ -55,7 +55,7 @@ function Home() {
     };
 
     const deletefunction = async(d)=>{
-        const del = await axios.post(`http://localhost:5000/deletcontest/${d}`);
+        const del = await axios.post(`https://ipl-v1-backend.onrender.com/deletcontest/${d}`);
         if(del.data === "done"){
             window.location.reload()
         }

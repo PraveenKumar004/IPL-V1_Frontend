@@ -31,7 +31,7 @@ function Home() {
 
     const getTeams = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/getteams/${mid}`);
+            const response = await axios.get(`https://ipl-v1-backend.onrender.com/getteams/${mid}`);
             setTeams(response.data);
         } catch (err) {
             console.log(err);
@@ -40,7 +40,7 @@ function Home() {
 
     const getPlayers = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/getsoldplayersbypid/${mid}`);
+            const response = await axios.get(`https://ipl-v1-backend.onrender.com/getsoldplayersbypid/${mid}`);
             const playersByTeam = response.data.reduce((acc, player) => {
                 const teamId = player.pid;
                 if (!acc[teamId]) {

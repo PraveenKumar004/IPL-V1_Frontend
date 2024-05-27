@@ -6,7 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000', {
+const socket = io('https://ipl-v1-backend.onrender.com', {
     transports: ['websocket', 'polling'],
 });
 
@@ -28,7 +28,7 @@ function Home() {
 
     const getPlayers = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/getplayer`);
+            const response = await axios.get(`https://ipl-v1-backend.onrender.com/getplayer`);
             setPlayers(response.data);
         } catch (err) {
             console.log(err);
@@ -37,7 +37,7 @@ function Home() {
 
     const selectplayer = async (e) => {
         try {
-            const response = await axios.post(`http://localhost:5000/addauctionplayer/${id}`, e);
+            const response = await axios.post(`https://ipl-v1-backend.onrender.com/addauctionplayer/${id}`, e);
             if (response.data === "exist") {
                 alert("Already in Bid");
             } else if (response.data === "soldorunsold") {

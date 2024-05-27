@@ -9,7 +9,7 @@ import '../styles/manager.css';
 import axios from 'axios';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000', {
+const socket = io('https://ipl-v1-backend.onrender.com', {
   transports: ['websocket', 'polling'],
   withCredentials: true,
 });
@@ -54,7 +54,7 @@ function Home() {
 
     const soldplayer = async () => {
         try {
-            const response = await axios.post(`http://localhost:5000/soldplayer/${id}`);
+            const response = await axios.post(`https://ipl-v1-backend.onrender.com/soldplayer/${id}`);
             if (response.data === "done") {
                 alert("Player not sold");
             } else {
@@ -70,7 +70,7 @@ function Home() {
 
     const getManagerdetail = async () =>{
         try {
-            const response = await axios.post(`http://localhost:5000/managerdetails/${id}`);
+            const response = await axios.post(`https://ipl-v1-backend.onrender.com/managerdetails/${id}`);
             if (response.data === "managernot") {
                 
             } else {

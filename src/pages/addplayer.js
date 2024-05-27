@@ -29,7 +29,7 @@ function Home() {
     const addplayer = async () => {
         try {
             console.log(data);
-            const create = await axios.post('http://localhost:5000/createplayer', data);
+            const create = await axios.post('https://ipl-v1-backend.onrender.com/createplayer', data);
             if (create.data === "exist") {
                 alert("Not Done")
             }

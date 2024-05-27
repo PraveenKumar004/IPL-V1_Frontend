@@ -25,7 +25,7 @@ function Home() {
 
   const getTeams = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/getsoldplayersbypid/${mid}`);
+      const response = await axios.get(`https://ipl-v1-backend.onrender.com/getsoldplayersbypid/${mid}`);
       setTeams(response.data);
     } catch (err) {
       console.log(err);
