@@ -44,7 +44,7 @@ const TopNav = ({ Title }) => {
     };
 
     const deletemanager = async () => {
-        const del = await axios.post(`http://localhost:5000/deletmanager/${id}`)
+        const del = await axios.post(`https://ipl-v1-backend.onrender.com/deletmanager/${id}`)
         if (del.data === "done") {
             navigate('/')
         }
@@ -54,7 +54,7 @@ const TopNav = ({ Title }) => {
     }
 
     const updatepass = async () => {
-        const del = await axios.post(`http://localhost:5000/changepasswordmanager/${id}`, data)
+        const del = await axios.post(`https://ipl-v1-backend.onrender.com/changepasswordmanager/${id}`, data)
         if (del.data === "passupdate") {
             window.location.reload();
         }

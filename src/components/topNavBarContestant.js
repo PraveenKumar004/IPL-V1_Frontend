@@ -40,7 +40,7 @@ const TopNav = ({ Title }) => {
     };
 
     const updatepass = async () => {
-        const del = await axios.post(`http://localhost:5000/changepasswordcontest/${id}`, data)
+        const del = await axios.post(`https://ipl-v1-backend.onrender.com/changepasswordcontest/${id}`, data)
         if (del.data === "passupdate") {
             window.location.reload();
         }
