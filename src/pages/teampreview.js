@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TopNav from '../components/topNavBarManager';
+import TopNav from '../components/topNavBarHome';
 import SideNav from '../components/sideNavBarHome';
 import { Modal, Button } from 'react-bootstrap';
 import '../styles/manager.css';

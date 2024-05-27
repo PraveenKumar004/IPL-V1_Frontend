@@ -10,8 +10,6 @@ function Home() {
     const [players, setPlayers] = useState();
 
     useEffect(() => {
-        
-
         getPlayers();
     }, []);
 
