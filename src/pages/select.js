@@ -12,7 +12,10 @@ const socket = io('https://ipl-v1-backend.onrender.com', {
 
 function Home() {
 
-    const [players, setPlayers] = useState();
+    const [players, setPlayers] = useState([]);
+    const [filteredPlayers, setFilteredPlayers] = useState([]);
+    const [category, setCategory] = useState('FULL LIST');
+    const [searchQuery, setSearchQuery] = useState('');
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -24,7 +27,11 @@ function Home() {
             return;
         }
         getPlayers();
-    }, [id,verifysession]);
+    }, [id, verifysession]);
+
+    useEffect(() => {
+        filterPlayers(category, searchQuery);
+    }, [players, category, searchQuery]);
 
     const getPlayers = async () => {
         try {
@@ -52,6 +59,20 @@ function Home() {
         }
     }
 
+    const filterPlayers = (category, query) => {
+        let filtered = players;
+
+        if (category !== 'FULL LIST') {
+            filtered = filtered.filter(player => player.category === category);
+        }
+
+        if (query) {
+            filtered = filtered.filter(player => player.name.toLowerCase().includes(query.toLowerCase()));
+        }
+
+        setFilteredPlayers(filtered);
+    };
+
     return (
         <>
             <div className='top-position'><TopNav Title={"Select"} /></div>
@@ -59,12 +80,19 @@ function Home() {
                 <div className='side-position'><SideNav /></div>
                 <div className='main'>
                     <div className='task-search-filter mt-4'>
+                        <button className='task-btn m-2' style={{ marginLeft: '0px' }} onClick={() => setCategory('FULL LIST')}>FULL LIST</button>
+                        <button className='task-btn m-2' onClick={() => setCategory('BAT')}>BAT</button>
+                        <button className='task-btn m-2' onClick={() => setCategory('BOWL')}>BOWL</button>
+                        <button className='task-btn m-2' onClick={() => setCategory('ALL')}>ALL</button>
                     </div>
                     <div className='task-search-filter mt-3'>
-                        <button className='task-btn' style={{ marginLeft: '0px' }}>Batsman</button>
-                        <button className=' task-btn'>Bowler</button>
-                        <button className=' task-btn' style={{ width: '70px' }}>All</button>
-                        <button className=' task-btn' style={{ width: '70px' }}>All</button>
+                        <input
+                            type="text"
+                            placeholder="Search by name"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className='search-input'
+                        />
                     </div>
                     <div className='task-list mt-4'>
                         <div className='tasks-body'>
@@ -77,31 +105,33 @@ function Home() {
                                     <div className='title-h4'>Base Price</div>
                                     <div className='title-h5'>Points</div>
                                 </div>
-                                {players ? players.map(player => (
-                                    <>
-                                        <div className='task-inside-body pb-1' onClick={() => { selectplayer(player) }}>
-                                            <div className='title-c1'>{player.name}</div>
-                                            <div className='title-c2'>{player.countryshort}</div>
-                                            <div className='title-c3'>{player.category}</div>
-                                            <div className='title-c4'>{player.baseprice}</div>
-                                            <div className='title-c5'>{player.points}</div>
-                                        </div>
-                                        <div className='task-inside-body-mobile pb-1' onClick={() => { selectplayer(player) }}>
-                                            <div className='mobile-c1' style={{ fontSize: '13px' }}>{player.name}</div><div className='mobile-c1'>|</div>
-                                            <div className='mobile-c1'>{player.countryshort}</div><div className='mobile-c1'>|</div>
-                                            <div className='mobile-c1'>{player.category}</div><div className='mobile-c1'>|</div>
-                                            <div className='mobile-c1'>{player.baseprice}</div><div className='mobile-c1'>|</div>
-                                            <div className='mobile-c1'>{player.points}</div>
-                                        </div>
-                                    </>
-                                )) : <div>Loading..</div>}
+                                {filteredPlayers.length ? filteredPlayers.map(player => (
+                                    <React.Fragment key={player._id}>
+                                        <>
+                                            <div className='task-inside-body pb-1' onClick={() => { selectplayer(player) }}>
+                                                <div className='title-c1'>{player.name}</div>
+                                                <div className='title-c2'>{player.countryshort}</div>
+                                                <div className='title-c3'>{player.category}</div>
+                                                <div className='title-c4'>{player.baseprice}</div>
+                                                <div className='title-c5'>{player.points}</div>
+                                            </div>
+                                            <div className='task-inside-body-mobile pb-1' onClick={() => { selectplayer(player) }}>
+                                                <div className='mobile-c1' style={{ fontSize: '13px' }}>{player.name}</div><div className='mobile-c1'>|</div>
+                                                <div className='mobile-c1'>{player.countryshort}</div><div className='mobile-c1'>|</div>
+                                                <div className='mobile-c1'>{player.category}</div><div className='mobile-c1'>|</div>
+                                                <div className='mobile-c1'>{player.baseprice}</div><div className='mobile-c1'>|</div>
+                                                <div className='mobile-c1'>{player.points}</div>
+                                            </div>
+                                        </>
+                                    </React.Fragment>
+                                )) : <div>No Player</div>}
                             </div>
                         </div>
 
                     </div>
 
                 </div>
-            </div>
+            </div >
         </>
 
     )

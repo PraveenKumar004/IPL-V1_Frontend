@@ -67,12 +67,12 @@ const TopNav = ({ Title }) => {
         <>
             <div className='d-flex topnav align-items-center'>
                 <div className='bar ps-3' onClick={handleShowh}><FaBars /></div>
-                <div className='title pt-1'>IPL </div>
+                <div className='title pt-1' onClick={()=>{window.location.href='/'}}>IPL </div>
                 <div className='tophead pt-1 h5'>{Title}</div>
             </div>
             <Offcanvas show={showh} onHide={handleCloseh} className='offcanva w-75'>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>IPL</Offcanvas.Title>
+                    <Offcanvas.Title onClick={()=>{window.location.href='/'}} >IPL</Offcanvas.Title>
                 </Offcanvas.Header>
                 <div className='inside-sidenav'>
                     <NavLink className='sidenav-links d-flex' to={`/manager/${id}`}>
