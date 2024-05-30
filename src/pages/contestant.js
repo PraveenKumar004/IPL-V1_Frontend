@@ -19,6 +19,9 @@ function Home() {
     const { mid } = useParams();
     const navigate = useNavigate();
 
+    const [message, setMessage] = useState('');
+    const [messages, setMessages] = useState([]);
+
     const verifysession = sessionStorage.getItem("id");
 
     useEffect(() => {
@@ -84,6 +87,33 @@ function Home() {
         }
     };
 
+    useEffect(() => {
+        console.log("cal")
+        socket.emit('joinMessageRoom', mid);
+        socket.on('messagedetails', (details) => {
+            setMessages(details);
+        });
+
+        return () => {
+            socket.emit('leavemessageRoom', mid);
+            socket.off('messagedetails');
+            socket.off('newMessage');
+        };
+    }, [mid]);
+
+    const sendMessage = async () => {
+        console.log("message")
+        if (message !== '' && players) {
+            const messageData = {
+                mid: mid,
+                message,
+                sender: players.teamAbbreviation,
+            };
+            socket.emit('newMessage', messageData);
+            setMessage('');
+        }
+    };
+
     return (
         <>
             <div className='top-position'><TopNav Title={players.teamName} /></div>
@@ -116,7 +146,20 @@ function Home() {
                                 <div onClick={() => { Bid() }} className='bid-button' style={{ cursor: 'pointer' }}>Make Bid</div>
                             </div>
                         </div>
-                        <div className='manager-body-right'>
+                        <div className='manager-body-right mt-4 mb-5'>
+                            <div className=' inside-chat' style={{ overflowY: 'scroll' }}>
+                                <div>
+                                    {messages.map((msg, index) => (
+                                        <div className='m-2' key={index}>
+                                            <div className='chat-team p-1 ps-2 pe-2'>{msg.sender}</div>
+                                            <div className='chat-message p-1 ps-2 pe-2'>{msg.message}</div>
+                                        </div>
+                                    ))}
+                                    <div className='m-2 mb-3'>
+                                        <input placeholder='enter message' className='chat-input p-1' value={message} onChange={(e) => setMessage(e.target.value)} />
+                                        <button className='chat-button p-1' onClick={sendMessage}>Send</button></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
