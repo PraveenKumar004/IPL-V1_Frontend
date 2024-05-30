@@ -63,16 +63,26 @@ const TopNav = ({ Title }) => {
         }
     }
 
+    const deletemessage = async () => {
+        const del = await axios.post(`https://ipl-v1-backend.onrender.com/deletmessage/${id}`)
+        if (del.data === "done") {
+          alert("Done")
+        }
+        else {
+          alert("Can't Delete")
+        }
+      }
+
     return (
         <>
             <div className='d-flex topnav align-items-center'>
                 <div className='bar ps-3' onClick={handleShowh}><FaBars /></div>
-                <div className='title pt-1' onClick={()=>{window.location.href='/'}}>IPL </div>
+                <div className='title pt-1' onClick={() => { window.location.href = '/' }}>IPL </div>
                 <div className='tophead pt-1 h5'>{Title}</div>
             </div>
             <Offcanvas show={showh} onHide={handleCloseh} className='offcanva w-75'>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title onClick={()=>{window.location.href='/'}} >IPL</Offcanvas.Title>
+                    <Offcanvas.Title onClick={() => { window.location.href = '/' }} >IPL</Offcanvas.Title>
                 </Offcanvas.Header>
                 <div className='inside-sidenav'>
                     <NavLink className='sidenav-links d-flex' to={`/manager/${id}`}>
@@ -99,6 +109,9 @@ const TopNav = ({ Title }) => {
                     <Link className='sidenav-links d-flex' onClick={handleShow}>
                         <div><RiDeleteBinLine /></div><div style={{ paddingTop: '5px', paddingLeft: '14px', fontSize: '17px' }}>Delete Game</div>
                     </Link>
+                    <Link className='sidenav-links d-flex' onClick={deletemessage}>
+                        <div><RiDeleteBinLine /></div><div style={{ paddingTop: '5px', paddingLeft: '14px', fontSize: '17px' }}>Delete Message</div>
+                    </Link>
                     <Modal show={show} onHide={handleClose} >
                         <Modal.Header closeButton>
                             <Modal.Title>Alert!!</Modal.Title>
@@ -110,12 +123,12 @@ const TopNav = ({ Title }) => {
                     </Modal>
                     <Modal show={show2} onHide={handleClose2} centered>
                         <Modal.Header closeButton>
-                            <Modal.Title>New Game</Modal.Title>
+                            <Modal.Title>Change Password</Modal.Title>
                         </Modal.Header>
                         <div className='d-flex flex-column home-modal mt-3 mb-3'>
                             <input className='home-modal-input' placeholder='Enter Old Password' name='password' onChange={input} />
                             <input className='home-modal-input' placeholder='Enter New Password' name='newpassword' onChange={input} />
-                            <button onClick={updatepass} className='home-btn' style={{ width: '150px', fontSize: '16px' }}>Create</button>
+                            <button onClick={updatepass} className='home-btn' style={{ width: '150px', fontSize: '16px' }}>Change</button>
                         </div>
                     </Modal>
                 </div>

@@ -86,7 +86,8 @@
     align-items: center;
     justify-content: center;
 }
-.home-modal-input{
+
+.home-modal-input {
     margin: 5px;
     padding: 5px;
     font-size: 16px;
@@ -95,13 +96,34 @@
     border: none;
     border: 2px solid #00000041;
 }
-.home-modal-input::placeholder{
+
+.home-modal-input::placeholder {
     padding: 5px;
     font-size: 16px;
     font-weight: 500;
     color: #00000096;
 }
 
+.spinner {
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner-fast {
+    width: 110px;
+    height: 110px;
+    animation: spinner-border 1.5s linear infinite;
+}
+
+@keyframes spinner-border {
+    to {
+        transform: rotate(360deg);
+    }
+}
 
 @media screen and (max-width:900px) {
     .dash-total-box {

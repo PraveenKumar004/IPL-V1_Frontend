@@ -56,6 +56,16 @@ const SideNav = () => {
     }
   }
 
+  const deletemessage = async () => {
+    const del = await axios.post(`https://ipl-v1-backend.onrender.com/deletmessage/${id}`)
+    if (del.data === "done") {
+      alert("Done")
+    }
+    else {
+      alert("Can't Delete")
+    }
+  }
+
   return (
     <>
       <div className='sidenav'>
@@ -84,6 +94,9 @@ const SideNav = () => {
           <Link className='sidenav-links d-flex' onClick={handleShow}>
             <div><RiDeleteBinLine /></div><div style={{ paddingTop: '5px', paddingLeft: '14px', fontSize: '17px' }}>Delete Game</div>
           </Link>
+          <Link className='sidenav-links d-flex' onClick={deletemessage}>
+            <div><RiDeleteBinLine /></div><div style={{ paddingTop: '5px', paddingLeft: '14px', fontSize: '17px' }}>Delete Message</div>
+          </Link>
           <Modal show={show} onHide={handleClose} >
             <Modal.Header closeButton>
               <Modal.Title>Alert!!</Modal.Title>
@@ -95,12 +108,12 @@ const SideNav = () => {
           </Modal>
           <Modal show={show2} onHide={handleClose2} centered>
             <Modal.Header closeButton>
-              <Modal.Title>New Game</Modal.Title>
+              <Modal.Title>Change Password</Modal.Title>
             </Modal.Header>
             <div className='d-flex flex-column home-modal mt-3 mb-3'>
               <input className='home-modal-input' placeholder='Enter Old Password' name='password' onChange={input} />
               <input className='home-modal-input' placeholder='Enter New Password' name='newpassword' onChange={input} />
-              <button onClick={updatepass} className='home-btn' style={{ width: '150px', fontSize: '16px' }}>Create</button>
+              <button onClick={updatepass} className='home-btn' style={{ width: '150px', fontSize: '16px' }}>Change</button>
             </div>
           </Modal>
         </div>
