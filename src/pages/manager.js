@@ -144,17 +144,17 @@ function Home() {
 
         useEffect(() => {
             console.log("cal")
-            socket.emit('joinMessageRoom', mid);
+            socket.emit('joinMessageRoom', id);
             socket.on('messagedetails', (details) => {
                 setMessages(details);
             });
 
             return () => {
-                socket.emit('leavemessageRoom', mid);
+                socket.emit('leavemessageRoom', id);
                 socket.off('messagedetails');
                 socket.off('newMessage');
             };
-        }, [mid]);
+        }, [id]);
 
         const sendMessage = async () => {
             console.log("message")
