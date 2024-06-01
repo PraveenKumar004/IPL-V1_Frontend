@@ -72,8 +72,8 @@ const SideNav = () => {
               <Modal.Title>Change Password</Modal.Title>
             </Modal.Header>
             <div className='d-flex flex-column home-modal mt-3 mb-3'>
-              <input className='home-modal-input' placeholder='Enter Old Password' name='password' onChange={input} />
-              <input className='home-modal-input' placeholder='Enter New Password' name='newpassword' onChange={input} />
+              <input className='home-modal-input' placeholder='Enter Old Password' type='password' name='password' onChange={input} />
+              <input className='home-modal-input' placeholder='Enter New Password' type='password' name='newpassword' onChange={input} />
               <button onClick={updatepass} className='home-btn' style={{ width: '150px', fontSize: '16px' }}>Change</button>
             </div>
           </Modal>

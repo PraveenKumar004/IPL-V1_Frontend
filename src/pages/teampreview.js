@@ -102,7 +102,7 @@ function Home() {
                                 <div className='inside-show'>
                                     <p className='home-modal-input mt-4'>{team.teamName}</p>
                                     <p className='home-modal-input'>{team.teamAbbreviation}</p>
-                                    <input className='home-modal-input' placeholder='Enter Password' name='password' onChange={input} />
+                                    <input className='home-modal-input' placeholder='Enter Password' type='password' name='password' onChange={input} />
                                     <button className='home-btn mt-3' style={{ width: '100px', fontSize: '16px' }} onClick={() => { joinContestant(team._id) }}>Join</button>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@ function Home() {
                         <div className='d-flex flex-column home-modal mt-3 mb-3'>
                             <input className='home-modal-input' placeholder='Enter Team Name' name='teamName' onChange={input} />
                             <input className='home-modal-input' placeholder='Enter Abbreviation' name='teamAbbreviation' onChange={input} />
-                            <input className='home-modal-input' placeholder='Enter Password' name='password' onChange={input} />
+                            <input className='home-modal-input' placeholder='Enter Password' type='password' name='password' onChange={input} />
                         </div>
                     </Modal.Body>
                     <Modal.Footer>

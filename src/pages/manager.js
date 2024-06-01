@@ -131,7 +131,7 @@ function Home() {
 
     const getManagerdetail = async () => {
         try {
-            const response = await axios.post(`https://ipl-v1-backend.onrender.com/managerdetails/${id}`);
+            const response = await axios.get(`https://ipl-v1-backend.onrender.com/managerdetails/${id}`);
             if (response.data === "managernot") {
 
             } else {
