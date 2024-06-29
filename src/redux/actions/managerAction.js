@@ -95,3 +95,25 @@ export const getManager = (id) => async (dispatch) => {
     console.log(err);
   }
 }
+
+export const getAllManager = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`http://localhost:5000/allmanagerdetails`);
+    dispatch({
+      type: MANAGER_DETAILS,
+      payload: response.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const deletemanagers = (id) => async () => {
+  const del = await axios.post(`http://localhost:5000/deletmanager/${id}`)
+  if (del.data === "done") {
+    window.location.reload();
+  }
+  else {
+    alert("Can't Delete")
+  }
+}

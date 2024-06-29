@@ -4,18 +4,28 @@ import SideNav from '../../components/sideNavBarContestant';
 import '../../styles/select.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlayers } from '../../redux/actions/playerAction';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Home() {
 
-    const players = useSelector(state => state.player.data || []); 
+    const players = useSelector(state => state.player.data || []);
     const [filteredPlayers, setFilteredPlayers] = useState([]);
     const [category, setCategory] = useState('FULL LIST');
     const [searchQuery, setSearchQuery] = useState('');
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
+
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
+    const verifysession = sessionStorage.getItem("id");
+
     useEffect(() => {
+        if (verifysession !== id) {
+            navigate('/');
+            return;
+        }
         dispatch(getPlayers()).then(() => setLoading(false));
     }, [dispatch]);
 

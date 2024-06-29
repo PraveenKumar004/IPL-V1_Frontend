@@ -47,6 +47,19 @@ export const getContest = (id) => async (dispatch) => {
   }
 }
 
+
+export const getAllContest = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`http://localhost:5000/getallteams`);
+    dispatch({
+      type: CONTESTANT_LIST,
+      payload: response.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export const deleteContestant = (d) => async () => {
   const del = await axios.post(`http://localhost:5000/deletcontest/${d}`);
   if (del.data === "done") {

@@ -119,6 +119,23 @@
     animation: spinner-border 1.5s linear infinite;
 }
 
+.admin-main-dash {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.admin-dash {
+    width: 30%;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 7px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    border-radius: 10px;
+    height: fit-content;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 @keyframes spinner-border {
     to {
         transform: rotate(360deg);
@@ -132,5 +149,9 @@
 
     .tasks {
         width: 90%;
+    }
+
+    .admin-dash {
+        width: 80%;
     }
 }

@@ -24,7 +24,13 @@ function Home() {
     const value = useSelector(state => state.manager.data);
     const teams = useSelector(state => state.contestant.data || []);
 
+    const verifysession = sessionStorage.getItem("id");
+
     useEffect(() => {
+        if (verifysession !== id) {
+            navigate('/');
+            return;
+        }
         dispatch(getManager(id));
         dispatch(getContest(id));
     }, [id]);

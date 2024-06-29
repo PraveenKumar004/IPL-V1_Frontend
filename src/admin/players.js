@@ -1,31 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import TopNav from '../../components/topNavBarManager';
-import SideNav from '../../components/sideNavBarManger';
-import '../../styles/select.css';
+import TopNav from '../components/topNavBarAdmin';
+import SideNav from '../components/sideNavBarAdmin';
+import '../styles/select.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPlayers } from '../../redux/actions/playerAction';
-import { useNavigate, useParams } from 'react-router-dom';
-
+import { getPlayers, deletePlayer } from '../redux/actions/playerAction';
+import { MdDelete } from "react-icons/md";
 
 function Home() {
 
-    const players = useSelector(state => state.player.data || []); 
+    const players = useSelector(state => state.player.data || []);
     const [filteredPlayers, setFilteredPlayers] = useState([]);
     const [category, setCategory] = useState('FULL LIST');
     const [searchQuery, setSearchQuery] = useState('');
-    const [loading, setLoading] = useState(true); 
-
-    const { id } = useParams();
-    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
-    const verifysession = sessionStorage.getItem("id");
 
     useEffect(() => {
-        if (verifysession !== id) {
-            navigate('/');
-            return;
-          }
         dispatch(getPlayers()).then(() => setLoading(false));
     }, [dispatch]);
 
@@ -43,6 +34,11 @@ function Home() {
         }
         setFilteredPlayers(filtered);
     };
+
+    const deletePlayerfunction = (del) => {
+        console.log(del)
+        dispatch(deletePlayer(del));
+    }
 
     return (
         <>
@@ -76,6 +72,7 @@ function Home() {
                                     <div className='title-h3'>Category</div>
                                     <div className='title-h4'>Base Price</div>
                                     <div className='title-h5'>Points</div>
+                                    <div className='title-h5' style={{ width: '35px' }}></div>
                                 </div>
                                 {loading ? (
                                     <div>Loading...</div>
@@ -88,13 +85,14 @@ function Home() {
                                                 <div className='title-c3'>{player.category}</div>
                                                 <div className='title-c4'>{player.baseprice} C</div>
                                                 <div className='title-c5'>{player.points}</div>
+                                                <div className='title-c5' style={{ width: '35px', cursor: 'pointer' }} onClick={() => { deletePlayerfunction(player._id) }}><MdDelete className='h5'/></div>
                                             </div>
                                             <div className='task-inside-body-mobile pb-1'>
                                                 <div className='mobile-c1' style={{ fontSize: '13px' }}>{player.name}</div><div className='mobile-c1'>|</div>
                                                 <div className='mobile-c1'>{player.countryshort}</div><div className='mobile-c1'>|</div>
                                                 <div className='mobile-c1'>{player.category}</div><div className='mobile-c1'>|</div>
-                                                <div className='mobile-c1'>{player.baseprice} C</div><div className='mobile-c1'>|</div>
-                                                <div className='mobile-c1'>{player.points}</div>
+                                                <div className='mobile-c1'>{player.points}</div><div className='mobile-c1'>|</div>
+                                                <div className='mobile-c1' onClick={() => { deletePlayerfunction(player._id) }}><MdDelete className='h5'/></div>
                                             </div>
                                         </React.Fragment>
                                     )) : <div>No Player</div>
